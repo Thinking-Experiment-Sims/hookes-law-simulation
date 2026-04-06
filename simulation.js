@@ -190,10 +190,10 @@ class LabSimulation {
     }
 
     drawRuler(ctx, springBottom) {
-        const rulerX = this.springX + 80;
+        const rulerX = this.springX + 130;
         const rulerTop = this.springTopY + this.naturalLength - 20;
-        const rulerBottom = Math.min(this.H - 60, rulerTop + 420);
-        const rulerWidth = 30;
+        const rulerBottom = Math.min(this.H - 50, rulerTop + 450);
+        const rulerWidth = 32;
 
         // Ruler background
         ctx.fillStyle = getCanvasColor('rgba(229, 204, 143, 0.05)', 'rgba(11, 95, 119, 0.05)');
@@ -202,50 +202,48 @@ class LabSimulation {
         ctx.lineWidth = 1.5;
         ctx.strokeRect(rulerX, rulerTop, rulerWidth, rulerBottom - rulerTop);
 
-        // Tick marks (every 10 px = a marking, label every 50 px)
-        ctx.fillStyle = getCanvasColor('#a9b2c3', '#4b6570');
-        ctx.font = '9px Arial';
+        const pxPerCm = this.pxPerMeter / 100;
+        const startCm = Math.floor((rulerTop - this.referenceY) / pxPerCm);
+        const endCm = Math.ceil((rulerBottom - this.referenceY) / pxPerCm);
+
+        ctx.font = '10px Arial';
         ctx.textAlign = 'left';
         ctx.textBaseline = 'middle';
 
-        // Marks in cm from reference
-        const cmPerPx = 100 / this.pxPerMeter;
-        for (let y = rulerTop; y <= rulerBottom; y += 5) {
-            const distFromRef = y - this.referenceY;
-            const cm = distFromRef * cmPerPx;
+        for (let cm_10 = startCm * 10; cm_10 <= endCm * 10; cm_10 += 5) {
+            const y = this.referenceY + (cm_10 / 10) * pxPerCm;
+            if (y < rulerTop || y > rulerBottom) continue;
 
-            let tickLen = 4;
-            if (Math.abs(Math.round(cm * 2) - cm * 2) < 0.15) tickLen = 7; // 0.5 cm
-            if (Math.abs(Math.round(cm) - cm) < 0.15) tickLen = 12; // 1 cm
+            let tickLen = 6;
+            if (cm_10 % 10 === 0) tickLen = 12;
 
-            ctx.strokeStyle = getCanvasColor('#a9b2c3', '#4b6570');
-            ctx.lineWidth = 0.8;
+            ctx.strokeStyle = getCanvasColor('#a9b2c3', '#795548');
+            ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(rulerX, y);
             ctx.lineTo(rulerX + tickLen, y);
             ctx.stroke();
 
-            // Label every 2 cm
-            if (tickLen === 12 && Math.abs(Math.round(cm / 2) - cm / 2) < 0.15) {
-                ctx.fillStyle = getCanvasColor('#a9b2c3', '#4b6570');
-                ctx.font = '9px Arial';
-                ctx.fillText(cm.toFixed(0), rulerX + 14, y);
+            // Label every 2 cm mapping
+            if (cm_10 % 20 === 0) {
+                ctx.fillStyle = getCanvasColor('#a9b2c3', '#5d4037');
+                const label = (cm_10 / 10).toString();
+                ctx.fillText(label, rulerX + 16, y);
             }
         }
 
-        // Zero mark
-        ctx.fillStyle = '#ff5f7a';
-        ctx.font = 'bold 10px Arial';
-        ctx.textAlign = 'left';
+        // Zero mark highlighting
         const zeroY = this.referenceY;
         if (zeroY >= rulerTop && zeroY <= rulerBottom) {
             ctx.beginPath();
             ctx.moveTo(rulerX, zeroY);
             ctx.lineTo(rulerX + rulerWidth, zeroY);
-            ctx.strokeStyle = '#ff5f7a';
+            ctx.strokeStyle = '#ff5f7a'; 
             ctx.lineWidth = 1.5;
             ctx.stroke();
-            ctx.fillText('0', rulerX + 14, zeroY - 8);
+            ctx.fillStyle = '#ff5f7a'; 
+            ctx.font = 'bold 11px Arial';
+            ctx.fillText('0', rulerX + 16, zeroY - 8);
         }
 
         // Label
@@ -359,15 +357,15 @@ class LabSimulation {
         ctx.lineWidth = 1.5;
         ctx.setLineDash([6, 4]);
         ctx.beginPath();
-        ctx.moveTo(this.springX - 55, this.referenceY);
-        ctx.lineTo(this.springX + 70, this.referenceY);
+        ctx.moveTo(this.springX - 35, this.referenceY);
+        ctx.lineTo(this.springX + 140, this.referenceY);
         ctx.stroke();
         ctx.setLineDash([]);
 
         ctx.fillStyle = '#ff5f7a';
         ctx.font = 'bold 11px Arial';
-        ctx.textAlign = 'right';
-        ctx.fillText('x = 0 (ref)', this.springX - 58, this.referenceY + 4);
+        ctx.textAlign = 'left';
+        ctx.fillText('x = 0 (ref)', this.springX + 45, this.referenceY - 6);
         ctx.restore();
     }
 
@@ -377,7 +375,7 @@ class LabSimulation {
 
         if (Math.abs(stretchM) < 0.0005) return;
 
-        const annotX = this.springX - 50;
+        const annotX = this.springX + 45;
 
         ctx.save();
         ctx.strokeStyle = '#c8a24a';
@@ -412,11 +410,11 @@ class LabSimulation {
 
         // Label
         ctx.font = 'bold 12px Arial';
-        ctx.textAlign = 'right';
-        ctx.fillText(`x = ${(stretchM * 100).toFixed(1)} cm`, annotX - 10, (this.referenceY + currentY) / 2 + 4);
+        ctx.textAlign = 'left';
+        ctx.fillText(`x = ${(stretchM * 100).toFixed(1)} cm`, annotX + 12, (this.referenceY + currentY) / 2 + 4);
         ctx.font = '10px Arial';
         ctx.fillStyle = getCanvasColor('#a9b2c3', '#4b6570');
-        ctx.fillText(`(${stretchM.toFixed(4)} m)`, annotX - 10, (this.referenceY + currentY) / 2 + 18);
+        ctx.fillText(`(${stretchM.toFixed(4)} m)`, annotX + 12, (this.referenceY + currentY) / 2 + 18);
 
         ctx.restore();
     }
