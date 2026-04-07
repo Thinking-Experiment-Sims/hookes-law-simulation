@@ -4,7 +4,7 @@ An interactive physics lab simulation for **Hooke's Law**. Students hang masses 
 
 ## 🔗 Live Demo
 
-[View on GitHub Pages](https://thinkerlopez.github.io/hookes-law-simulation/)
+[View on GitHub Pages](https://thinking-experiment-sims.github.io/hookes-law-simulation/)
 
 ## Two Modes
 
