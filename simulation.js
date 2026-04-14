@@ -1172,10 +1172,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Override updateDisplay with direct ei element updates only (no origUpdate)
         eiSim.updateDisplay = function() {
-            const disp = el('eiDisplacement'); if (disp) disp.textContent = this.displacement.toFixed(3) + ' m';
-            const pe   = el('eiPE');          if (pe)   pe.textContent   = this.potentialEnergy.toFixed(3) + ' J';
-            const ke   = el('eiKE');          if (ke)   ke.textContent   = this.kineticEnergy.toFixed(3)  + ' J';
-            const te   = el('eiTotalE');      if (te)   te.textContent   = this.totalEnergy.toFixed(3)    + ' J';
+            const disp = el('eiDisplacement'); if (disp) disp.textContent = (this.displacement || 0).toFixed(3) + ' m';
+            const pe   = el('eiPE');          if (pe)   pe.textContent   = (this.potentialEnergy || 0).toFixed(3) + ' J';
+            const ke   = el('eiKE');          if (ke)   ke.textContent   = (this.kineticEnergy || 0).toFixed(3)  + ' J';
+            const te   = el('eiTotalE');      if (te)   te.textContent   = (this.totalEnergy || 0).toFixed(3)    + ' J';
         };
         eiSim.updateDisplay();
 
@@ -1304,17 +1304,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 tbody.innerHTML = '<tr><td colspan="6" style="color:var(--text-500);font-style:italic;">No data yet \u2014 capture snapshots above.</td></tr>';
                 return;
             }
-            tbody.innerHTML = energyRows.map((r, i) => `<tr class="recorded">
+            tbody.innerHTML = energyRows.map((r, i) => `<tr class="recorded ${i === energyRows.length - 1 ? 'row-flash' : ''}">
                 <td>${i+1}</td><td>${r.x.toFixed(3)}</td><td>${r.xSq.toFixed(4)}</td>
                 <td>${r.pe.toFixed(3)}</td><td>${r.ke.toFixed(3)}</td><td>${r.total.toFixed(3)}</td>
             </tr>`).join('');
         }
 
-        el('eiCaptureBtn').addEventListener('click', () => {
+        el('eiCaptureBtn').addEventListener('click', (e) => {
+            const btn = e.currentTarget;
             const x = eiSim.displacement;
             energyRows.push({ x, xSq: x*x, pe: eiSim.potentialEnergy, ke: eiSim.kineticEnergy, total: eiSim.totalEnergy });
             rebuildEnergyTable();
             drawPEvsx2Graph();
+
+            // UI Feedback
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✨ Captured!';
+            btn.classList.add('capture-success');
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('capture-success');
+            }, 800);
         });
         el('eiClearBtn').addEventListener('click', () => {
             energyRows.length = 0;
