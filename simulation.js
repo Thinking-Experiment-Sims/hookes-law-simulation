@@ -1260,7 +1260,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             ctx.fillStyle = getCanvasColor('#a9b2c3', '#4b6570'); ctx.font = '11px Arial';
             ctx.textAlign = 'center'; ctx.textBaseline = 'top';
-            ctx.fillText('x\u00b2 (m\u00b2)', pad.left + pw/2, H - 14);
+            ctx.fillText('\u0394x\u00b2 (m\u00b2)', pad.left + pw/2, H - 14);
             ctx.save(); ctx.translate(14, pad.top+ph/2); ctx.rotate(-Math.PI/2);
             ctx.fillStyle = '#ff5f7a'; ctx.font = 'bold 12px Arial'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
             ctx.fillText('PE (J)', 0, 0); ctx.restore();

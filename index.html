@@ -363,8 +363,8 @@
                     <canvas id="energySpringCanvas" class="sim-canvas" width="700" height="380" role="img" aria-label="Horizontal spring oscillation for energy inquiry"></canvas>
 
                     <div class="metric-grid" style="grid-template-columns:repeat(4,1fr);margin-top:0.7rem;">
-                        <div class="metric-card"><div class="metric-line"><span>Displacement (x)</span><span id="eiDisplacement">0.00 m</span></div></div>
-                        <div class="metric-card" style="border-left-color:var(--danger);"><div class="metric-line"><span>PE (½kx²)</span><span id="eiPE">0.00 J</span></div></div>
+                        <div class="metric-card"><div class="metric-line"><span>Displacement (Δx)</span><span id="eiDisplacement">0.00 m</span></div></div>
+                        <div class="metric-card" style="border-left-color:var(--danger);"><div class="metric-line"><span>PE (½kΔx²)</span><span id="eiPE">0.00 J</span></div></div>
                         <div class="metric-card" style="border-left-color:var(--success);"><div class="metric-line"><span>KE (½mv²)</span><span id="eiKE">0.00 J</span></div></div>
                         <div class="metric-card" style="border-left-color:#a78bfa;"><div class="metric-line"><span>Total E</span><span id="eiTotalE">0.00 J</span></div></div>
                     </div>
@@ -395,7 +395,7 @@
                             </div>
                         </label>
                         <label class="control-span-2">
-                            Initial Displacement (x₀)
+                            Initial Displacement (Δx₀)
                             <div class="range-row">
                                 <input type="range" id="eiDisplacementSlider" min="-2" max="2" step="0.05" value="1">
                                 <output id="eiDisplacementDisplay">1.00 m</output>
@@ -433,7 +433,7 @@
                     <p>Before collecting data, answer these in your notebook:</p>
                     <ol class="inquiry-ol">
                         <li>If you stretch the spring <strong>twice as far</strong>, does it store twice the energy, less than twice, or more than twice? Why?</li>
-                        <li>At the <strong>equilibrium position</strong> (x = 0), where is all the energy? What about at the <strong>maximum stretch</strong>?</li>
+                        <li>At the <strong>equilibrium position</strong> (Δx = 0), where is all the energy? What about at the <strong>maximum stretch</strong>?</li>
                         <li>Do you expect the total energy to stay constant or change over time (with no damping)?</li>
                     </ol>
                 </div>
@@ -441,10 +441,10 @@
                 <!-- PART 2 -->
                 <div class="inquiry-card" style="margin-top:0.8rem;border-left:5px solid var(--success);">
                     <h3>📊 Part 2 · Collect Data</h3>
-                    <p>Set damping to <em>0.0</em>. Click <strong>Start</strong>, then <strong>Pause</strong> at several different positions. Press <strong>⚡ Capture Snapshot</strong> above to record. Aim for <strong>at least 6 snapshots</strong> spread across a range of x values.</p>
+                    <p>Set damping to <em>0.0</em>. Click <strong>Start</strong>, then <strong>Pause</strong> at several different positions. Press <strong>⚡ Capture Snapshot</strong> above to record. Aim for <strong>at least 6 snapshots</strong> spread across a range of Δx values.</p>
                     <div class="data-table-wrap" style="margin-top:0.8rem;">
                         <table class="data-table" id="energyDataTable">
-                            <thead><tr><th>#</th><th>x (m)</th><th>x² (m²)</th><th>PE (J)</th><th>KE (J)</th><th>Total E (J)</th></tr></thead>
+                            <thead><tr><th>#</th><th>Δx (m)</th><th>Δx² (m²)</th><th>PE (J)</th><th>KE (J)</th><th>Total E (J)</th></tr></thead>
                             <tbody id="energyDataBody"><tr><td colspan="6" style="color:var(--text-500);font-style:italic;">No data yet — capture snapshots above.</td></tr></tbody>
                         </table>
                     </div>
@@ -454,7 +454,7 @@
                 <div class="energy-inquiry-layout" style="margin-top:0.8rem;">
                     <div class="inquiry-card" style="border-left:5px solid var(--danger);">
                         <h3>📈 Part 3 · Graph &amp; Discover</h3>
-                        <p>The graph plots your <strong>PE</strong> (y-axis) vs. <strong>x²</strong> (x-axis). Toggle the best-fit line and read the slope.</p>
+                        <p>The graph plots your <strong>PE</strong> (y-axis) vs. <strong>Δx²</strong> (x-axis). Toggle the best-fit line and read the slope.</p>
                         <p style="margin-top:0.5rem;">💡 <em>What does the slope equal? How does it relate to k?</em></p>
                         <label class="compact-toggle" style="margin-top:0.7rem;">
                             <input type="checkbox" id="energyShowBestFit">
@@ -472,9 +472,9 @@
                     <h3>🧠 Part 4 · Reflect &amp; Conclude</h3>
                     <ol class="inquiry-ol">
                         <li>Look at the <strong>Total E</strong> column. Is it constant? What does this tell you about energy in the spring system?</li>
-                        <li>Your PE vs. x² graph should be a straight line through the origin. What relationship does this reveal between PE and x?</li>
-                        <li>The slope equals <strong>½k</strong>. Write the complete formula: <strong>PE = ____</strong></li>
-                        <li>When KE = 0, where is the mass? Write an equation relating PE<sub>max</sub> to total energy using your formula.</li>
+                        <li>Your PE vs. Δx² graph should be a straight line through the origin. What relationship does this reveal between PE and Δx?</li>
+                        <li>The slope equals <strong>½k</strong>. Write the complete formula: <strong>PE = ½kΔx²</strong> — confirm your slope matches ½k from your settings.</li>
+                        <li>When KE = 0, where is the mass? Write an equation relating PE<sub>max</sub> to total energy using PE = ½kΔx².</li>
                         <li><strong>Extension:</strong> Enable damping &gt; 0 and re-run. What happens to Total E over time? Where does the energy go?</li>
                     </ol>
                 </div>
@@ -486,6 +486,6 @@
         </footer>
     </div>
 
-    <script src="simulation.js?v=1.8"></script>
+    <script src="simulation.js?v=1.9"></script>
 </body>
 </html>
