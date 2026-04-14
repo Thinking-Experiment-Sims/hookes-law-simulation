@@ -250,7 +250,7 @@ class LabSimulation {
         ctx.fillStyle = getCanvasColor('#a9b2c3', '#4b6570');
         ctx.font = '10px Arial';
         ctx.textAlign = 'center';
-        ctx.fillText('Stretch (cm from reference)', 0, 0);
+        ctx.fillText('\u0394x (cm from reference)', 0, 0);
         ctx.restore();
     }
 
@@ -362,7 +362,7 @@ class LabSimulation {
         ctx.fillStyle = '#ff5f7a';
         ctx.font = 'bold 11px Arial';
         ctx.textAlign = 'left';
-        ctx.fillText('x = 0 (ref)', this.springX + 45, this.referenceY - 6);
+        ctx.fillText('\u0394x = 0 (ref)', this.springX + 45, this.referenceY - 6);
         ctx.restore();
     }
 
@@ -408,7 +408,7 @@ class LabSimulation {
         // Label
         ctx.font = 'bold 12px Arial';
         ctx.textAlign = 'left';
-        ctx.fillText(`x = ${(stretchM * 100).toFixed(1)} cm`, annotX + 12, (this.referenceY + currentY) / 2 + 4);
+        ctx.fillText(`\u0394x = ${(stretchM * 100).toFixed(1)} cm`, annotX + 12, (this.referenceY + currentY) / 2 + 4);
         ctx.font = '10px Arial';
         ctx.fillStyle = getCanvasColor('#a9b2c3', '#4b6570');
         ctx.fillText(`(${stretchM.toFixed(4)} m)`, annotX + 12, (this.referenceY + currentY) / 2 + 18);
@@ -537,7 +537,7 @@ class ForceStretchGraph {
         ctx.fillStyle = getCanvasColor('#a9b2c3', '#4b6570');
         ctx.font = '11px Arial';
         ctx.textAlign = 'center';
-        ctx.fillText('Stretch x (m)', padding.left + plotW / 2, this.H - 5);
+        ctx.fillText('Stretch \u0394x (m)', padding.left + plotW / 2, this.H - 5);
 
         ctx.save();
         ctx.translate(14, padding.top + plotH / 2);
@@ -775,7 +775,7 @@ class FreePlaySimulation {
         ctx.beginPath(); ctx.moveTo(this.equilibriumX, this.springY - 90); ctx.lineTo(this.equilibriumX, this.springY + 90); ctx.stroke();
         ctx.setLineDash([]);
         ctx.fillStyle = getCanvasColor('#a9b2c3', '#4b6570'); ctx.font = '12px Arial'; ctx.textAlign = 'center';
-        ctx.fillText('x = 0', this.equilibriumX, this.springY - 95);
+        ctx.fillText('\u0394x = 0', this.equilibriumX, this.springY - 95);
         ctx.fillText('(equilibrium)', this.equilibriumX, this.springY - 80);
         ctx.restore();
     }
@@ -841,7 +841,7 @@ class FreePlaySimulation {
         if (pw > 50) { ctx.fillStyle = getCanvasColor(getCanvasColor('#eef2f9', '#123140'), '#123140'); ctx.font = 'bold 12px Arial'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(`PE = ${this.potentialEnergy.toFixed(1)} J`, bx + pw / 2, by + bh / 2); }
         if (kw > 50) { ctx.fillStyle = getCanvasColor(getCanvasColor('#eef2f9', '#123140'), '#123140'); ctx.font = 'bold 12px Arial'; ctx.textAlign = 'center'; ctx.fillText(`KE = ${this.kineticEnergy.toFixed(1)} J`, bx + pw + kw / 2, by + bh / 2); }
         const ly = by + bh + 16; ctx.font = '12px Arial'; ctx.textAlign = 'left';
-        ctx.fillStyle = '#ff5f7a'; ctx.fillRect(bx, ly - 6, 12, 12); ctx.fillStyle = getCanvasColor(getCanvasColor('#eef2f9', '#123140'), '#123140'); ctx.fillText('PE (½kx²)', bx + 18, ly + 4);
+        ctx.fillStyle = '#ff5f7a'; ctx.fillRect(bx, ly - 6, 12, 12); ctx.fillStyle = getCanvasColor(getCanvasColor('#eef2f9', '#123140'), '#123140'); ctx.fillText('PE (\u00bdk\u0394x\u00b2)', bx + 18, ly + 4);
         ctx.fillStyle = '#5cbf79'; ctx.fillRect(bx + 140, ly - 6, 12, 12); ctx.fillStyle = getCanvasColor(getCanvasColor('#eef2f9', '#123140'), '#123140'); ctx.fillText('KE (½mv²)', bx + 158, ly + 4);
         ctx.fillStyle = getCanvasColor('#a9b2c3', '#4b6570'); ctx.fillText(`Total = ${(this.potentialEnergy + this.kineticEnergy).toFixed(2)} J`, bx + 310, ly + 4);
     }
@@ -856,7 +856,7 @@ class FreePlaySimulation {
         const d = Math.sign(this.displacement);
         ctx.fillStyle = '#c8a24a'; ctx.beginPath(); ctx.moveTo(mx, ay); ctx.lineTo(mx - d * 8, ay - 5); ctx.lineTo(mx - d * 8, ay + 5); ctx.closePath(); ctx.fill();
         ctx.font = 'bold 13px Arial'; ctx.textAlign = 'center'; ctx.textBaseline = 'top';
-        ctx.fillText(`x = ${this.displacement > 0 ? '+' : ''}${this.displacement.toFixed(2)} m`, (this.equilibriumX + mx) / 2, ay + 10);
+        ctx.fillText(`\u0394x = ${this.displacement > 0 ? '+' : ''}${this.displacement.toFixed(2)} m`, (this.equilibriumX + mx) / 2, ay + 10);
         ctx.restore();
     }
 
@@ -877,8 +877,8 @@ class FreePlaySimulation {
         ctx.fillText('← Compressed', this.equilibriumX - 100, this.springY - 110);
         ctx.fillText('Stretched →', this.equilibriumX + 100, this.springY - 110);
         ctx.font = '11px Arial'; ctx.fillStyle = getCanvasColor('#a9b2c3', '#4b6570');
-        ctx.fillText('(−x)', this.equilibriumX - 100, this.springY - 96);
-        ctx.fillText('(+x)', this.equilibriumX + 100, this.springY - 96);
+        ctx.fillText('(-\u0394x)', this.equilibriumX - 100, this.springY - 96);
+        ctx.fillText('(+\u0394x)', this.equilibriumX + 100, this.springY - 96);
     }
 
     drawGraphs() {

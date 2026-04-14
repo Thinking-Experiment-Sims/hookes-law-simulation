@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hooke's Law Simulation | The Thinking Experiment</title>
-    <meta name="description" content="Interactive Hooke's Law lab simulation. Hang masses from a spring, measure stretch, graph Force vs. Stretch, and discover the spring constant.">
+    <meta name="description" content="Interactive Hooke's Law lab simulation. Hang masses from a spring, measure stretch (Δx), graph Force vs. Δx, and discover the spring constant.">
     <link rel="icon" type="image/png" sizes="32x32" href="https://vladimirlopez.github.io/the-thinking-experiment/assets/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="https://vladimirlopez.github.io/the-thinking-experiment/assets/favicon-16.png" />
     <link rel="stylesheet" href="styles.css">
@@ -48,7 +48,7 @@
                 <div class="inquiry-grid">
                     <div class="inquiry-card">
                         <h3>Step 1 · Set Up</h3>
-                        <p>The position is zero when nothing is hanging (natural length). The 50 g hanger is already attached and causing an initial stretch. Add mass in 50 g increments.</p>
+                        <p>The position is zero when nothing is hanging (natural length). The 50 g hanger is already attached and causing an initial stretch (Δx). Add mass in 50 g increments.</p>
                     </div>
                     <div class="inquiry-card">
                         <h3>Step 2 · Record</h3>
@@ -56,7 +56,7 @@
                     </div>
                     <div class="inquiry-card">
                         <h3>Step 3 · Analyze</h3>
-                        <p>Watch your Force vs. Stretch graph build in real time. Toggle the best-fit line to discover the slope — and the spring constant.</p>
+                        <p>Watch your Force vs. Δx graph build in real time. Toggle the best-fit line to discover the slope — and the spring constant.</p>
                     </div>
                 </div>
             </div>
@@ -80,7 +80,7 @@
                             <div class="metric-line"><span class="metric-label">Weight (Force)</span><span id="labForce">0.000 N</span></div>
                         </div>
                         <div class="metric-card">
-                            <div class="metric-line"><span class="metric-label">Stretch</span><span id="labStretch">0.0000 m</span></div>
+                            <div class="metric-line"><span class="metric-label">Stretch (Δx)</span><span id="labStretch">0.0000 m</span></div>
                         </div>
                         <div class="metric-card">
                             <div class="metric-line"><span class="metric-label">Trials Recorded</span><span id="labTrials">0 / 8</span></div>
@@ -122,7 +122,7 @@
                                     <th>#</th>
                                     <th>Added (g)</th>
                                     <th>Total (kg)</th>
-                                    <th>Stretch (m)</th>
+                                    <th>Δx (m)</th>
                                     <th>Force (N)</th>
                                 </tr>
                             </thead>
@@ -140,7 +140,7 @@
                     </div>
 
                     <!-- Force vs Stretch Graph -->
-                    <h3 class="section-title">Force vs. Stretch</h3>
+                    <h3 class="section-title">Force vs. Δx</h3>
                     <canvas id="forceStretchGraph" class="sim-canvas graph-canvas" width="400" height="280"></canvas>
                     <label class="compact-toggle">
                         <input type="checkbox" id="showBestFit">
@@ -181,11 +181,11 @@
                     <div class="inquiry-grid" style="margin-top:0.6rem;">
                         <div class="inquiry-card">
                             <h3>🔮 Predict First</h3>
-                            <p>If you double the mass on the spring, what happens to the stretch? Less, same, more, or exactly twice as much? Make a prediction before collecting data!</p>
+                            <p>If you double the mass on the spring, what happens to the stretch (Δx)? Less, same, more, or exactly twice as much? Make a prediction before collecting data!</p>
                         </div>
                         <div class="inquiry-card">
                             <h3>📊 Analyze the Graph</h3>
-                            <p>What shape does the Force vs. Stretch graph make? Toggle the best-fit line. The slope has a physical meaning — "for every 1 m of stretch, the spring needs ___ N."</p>
+                            <p>What shape does the Force vs. Δx graph make? Toggle the best-fit line. The slope has a physical meaning — "for every 1 m of stretch, the spring needs ___ N."</p>
                         </div>
                         <div class="inquiry-card">
                             <h3>🧪 Build Your Model</h3>
@@ -208,7 +208,7 @@
                         <div>
                             <h3>Key Insights</h3>
                             <ul>
-                                <li><strong>Linear:</strong> Double the force → double the stretch.</li>
+                                <li><strong>Linear:</strong> Double the force → double the stretch (Δx).</li>
                                 <li><strong>Larger k</strong> = stiffer spring.</li>
                                 <li><strong>Elastic limit:</strong> Hooke's Law only holds if the spring returns to its natural length.</li>
                             </ul>
@@ -235,7 +235,7 @@
                     <canvas id="springCanvas" class="sim-canvas" width="700" height="480" role="img" aria-label="Horizontal spring oscillation"></canvas>
 
                     <div class="metric-grid readout-grid">
-                        <div class="metric-card"><div class="metric-line"><span>Displacement</span><span id="fpCurrentDisplacement">1.00 m</span></div></div>
+                        <div class="metric-card"><div class="metric-line"><span>Displacement (Δx)</span><span id="fpCurrentDisplacement">1.00 m</span></div></div>
                         <div class="metric-card"><div class="metric-line"><span>Velocity</span><span id="fpCurrentVelocity">0.00 m/s</span></div></div>
                         <div class="metric-card"><div class="metric-line"><span>Max Vel</span><span id="fpMaxVelocity">0.00 m/s</span></div></div>
                         <div class="metric-card"><div class="metric-line"><span>Min Vel</span><span id="fpMinVelocity">0.00 m/s</span></div></div>
@@ -249,7 +249,7 @@
                     <div class="graph-pair">
                         <div>
                             <canvas id="fpPositionGraph" class="sim-canvas graph-canvas-sm" width="500" height="180"></canvas>
-                            <p class="hint" style="text-align:center;">Displacement vs Time</p>
+                            <p class="hint" style="text-align:center;">Δx vs Time</p>
                         </div>
                         <div>
                             <canvas id="fpVelocityGraph" class="sim-canvas graph-canvas-sm" width="500" height="180"></canvas>
@@ -276,7 +276,7 @@
                             </div>
                         </label>
                         <label class="control-span-2">
-                            Initial Displacement (x₀)
+                            Initial Displacement (Δx₀)
                             <div class="range-row">
                                 <input type="range" id="fpDisplacement" min="-2" max="2" step="0.05" value="1">
                                 <output id="fpDisplacementDisplay">1.00 m</output>
