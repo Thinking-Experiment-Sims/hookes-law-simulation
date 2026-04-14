@@ -19,8 +19,8 @@ class LabSimulation {
         this.ctx.scale(dpr, dpr);
         this.W = rect.width;
         this.H = rect.height;
-        canvas.style.width = rect.width + 'px';
-        canvas.style.height = rect.height + 'px';
+        canvas.style.width = '100%';
+        canvas.style.height = 'auto';
         this.ctx.imageSmoothingEnabled = true;
         this.ctx.imageSmoothingQuality = 'high';
 
@@ -461,6 +461,8 @@ class ForceStretchGraph {
         this.ctx.scale(dpr, dpr);
         this.W = rect.width;
         this.H = rect.height;
+        this.canvas.style.width = '100%';
+        this.canvas.style.height = 'auto';
 
         this.draw();
     }
@@ -631,8 +633,8 @@ class FreePlaySimulation {
         this.ctx.scale(dpr, dpr);
         this.W = rect.width;
         this.H = rect.height;
-        canvas.style.width = rect.width + 'px';
-        canvas.style.height = rect.height + 'px';
+        canvas.style.width = '100%';
+        canvas.style.height = 'auto';
         this.ctx.imageSmoothingEnabled = true;
         this.ctx.imageSmoothingQuality = 'high';
 
