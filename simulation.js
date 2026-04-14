@@ -1164,20 +1164,20 @@ document.addEventListener('DOMContentLoaded', () => {
         eiSim = new FreePlaySimulation(eiCanvas);
         eiSim.showEnergyBar = true;
         eiSim.showForceArrows = false;
+        // No-op drawGraphs — avoids hidden canvas reflow that causes button flickering
+        eiSim.drawGraphs = function() {};
         eiSim.draw();
-        eiSim.updateDisplay();
 
         const el = (id) => document.getElementById(id);
 
-        // Override updateDisplay to also update ei-specific readouts
-        const origUpdate = eiSim.updateDisplay.bind(eiSim);
+        // Override updateDisplay with direct ei element updates only (no origUpdate)
         eiSim.updateDisplay = function() {
-            origUpdate();
-            if (el('eiDisplacement')) el('eiDisplacement').textContent = this.displacement.toFixed(3) + ' m';
-            if (el('eiPE'))          el('eiPE').textContent          = this.potentialEnergy.toFixed(3) + ' J';
-            if (el('eiKE'))          el('eiKE').textContent          = this.kineticEnergy.toFixed(3)  + ' J';
-            if (el('eiTotalE'))      el('eiTotalE').textContent      = this.totalEnergy.toFixed(3)    + ' J';
+            const disp = el('eiDisplacement'); if (disp) disp.textContent = this.displacement.toFixed(3) + ' m';
+            const pe   = el('eiPE');          if (pe)   pe.textContent   = this.potentialEnergy.toFixed(3) + ' J';
+            const ke   = el('eiKE');          if (ke)   ke.textContent   = this.kineticEnergy.toFixed(3)  + ' J';
+            const te   = el('eiTotalE');      if (te)   te.textContent   = this.totalEnergy.toFixed(3)    + ' J';
         };
+        eiSim.updateDisplay();
 
         el('eiSpringConstant').addEventListener('input', (e) => {
             eiSim.springConstant = parseFloat(e.target.value);
